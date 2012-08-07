@@ -1,4 +1,1 @@
-
-
-default["redis"] = {}
-default["redis"]["users"] = []
+default['redis']['dir'] = "/opt/local/etc"
