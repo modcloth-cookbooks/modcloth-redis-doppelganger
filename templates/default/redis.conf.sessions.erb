@@ -114,6 +114,7 @@ dir /var/db/redis
 # different interval, or to listen to another port, and so on.
 #
 # slaveof <masterip> <masterport>
+<%= "slaveof #{node[:redis][:slaveof][:ipaddress]} 6379" if node[:redis][:slaveof] %>
 
 # If the master is password protected (using the "requirepass" configuration
 # directive below) it is possible to tell the slave to authenticate before
