@@ -18,11 +18,11 @@ daemonize yes
 
 # When running daemonized, Redis writes a pid file in /var/run/redis.pid by
 # default. You can specify a custom pid file location here.
-pidfile /var/db/redis/<%= node['redis']['redis_pid'] %>
+pidfile /var/db/redis/<%= node['redis-master-slave']['redis_pid'] %>
 
 # Accept connections on the specified port, default is 6379.
 # If port 0 is specified Redis will not listen on a TCP socket.
-port <%= node['redis']['port'] %>
+port <%= node['redis-master-slave']['port'] %>
 
 # If you want you can bind a single interface, if the bind option is not
 # specified all the interfaces will listen for incoming connections.
@@ -50,7 +50,7 @@ loglevel notice
 # Specify the log file name. Also 'stdout' can be used to force
 # Redis to log on the standard output. Note that if you use standard
 # output for logging but daemonize, logs will be sent to /dev/null
-logfile /var/log/redis/<%= node['redis']['redis_log'] %>
+logfile /var/log/redis/<%= node['redis-master-slave']['redis_log'] %>
 
 # To enable logging to the system logger, just set 'syslog-enabled' to yes,
 # and optionally update the other syslog parameters to suit your needs.
@@ -335,7 +335,7 @@ slave-priority 100
 appendonly yes
 
 # The name of the append only file (default: "appendonly.aof")
-appendfilename <%= node['redis']['aof_file_name'] %>
+appendfilename <%= node['redis-master-slave']['aof_file_name'] %>
 
 # The fsync() call tells the Operating System to actually write data on disk
 # instead to wait for more data in the output buffer. Some OS will really flush
@@ -363,7 +363,7 @@ appendfilename <%= node['redis']['aof_file_name'] %>
 # appendfsync always
 # appendfsync everysec
 # appendfsync no
-appendfsync <%= node['redis']['master_slave'] ? 'no' : 'everysec' %>
+appendfsync <%= node['redis-master-slave']['appendfsync'] %>
 
 # When the AOF fsync policy is set to always or everysec, and a background
 # saving process (a background save or AOF log background rewriting) is
@@ -402,7 +402,7 @@ no-appendfsync-on-rewrite no
 # Specify a percentage of zero in order to disable the automatic AOF
 # rewrite feature.
 
-auto-aof-rewrite-percentage <%= node['redis']['master_slave'] ? '0' : '100' %>
+auto-aof-rewrite-percentage <%= node['redis-master-slave']['auto_aof_rewrite_percentage'] %>
 auto-aof-rewrite-min-size 64mb
 
 ################################ LUA SCRIPTING  ###############################

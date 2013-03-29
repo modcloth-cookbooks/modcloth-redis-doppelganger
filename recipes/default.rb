@@ -3,7 +3,7 @@ package node['redis']['pkg_name'] do
 end
 
 template "#{node['redis']['dir']}/redis.conf" do
-  source "redis.conf.erb"
+  source 'redis.conf.erb'
 end
 
 service node['redis']['service_name'] do
