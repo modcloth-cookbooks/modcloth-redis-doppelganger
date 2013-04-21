@@ -1,9 +1,9 @@
 daemonize yes
-pidfile /var/db/redis/<%= node['redis']['redis_pid'] %>
-port <%= node['redis']['port'] %>
+pidfile /var/db/redis/<%= node['redis-master-slave']['redis_pid'] %>
+port <%= node['redis-master-slave']['port'] %>
 timeout 0
 loglevel notice
-logfile /var/log/redis/<%= node['redis']['redis_log'] %>
+logfile /var/log/redis/<%= node['redis-master-slave']['redis_log'] %>
 databases 16
 
 stop-writes-on-bgsave-error yes
@@ -18,10 +18,10 @@ slave-read-only yes
 slave-priority 100
 
 appendonly yes
-appendfilename <%= node['redis']['aof_file_name'] %>
-appendfsync <%= node['redis']['master_slave'] ? 'no' : 'everysec' %>
+appendfilename <%= node['redis-master-slave']['aof_file_name'] %>
+appendfsync <%= node['redis-master-slave']['appendfsync'] %>
 no-appendfsync-on-rewrite no
-auto-aof-rewrite-percentage <%= node['redis']['master_slave'] ? '0' : '100' %>
+auto-aof-rewrite-percentage <%= node['redis-master-slave']['auto_aof_rewrite_percentage'] %>
 auto-aof-rewrite-min-size 64mb
 
 lua-time-limit 5000
